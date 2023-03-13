@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма регистрации</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 id="formTitle">Форма регистрации</h2>
+            <form id="registration-form" method="POST">
+
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" name="firstName" id="firstName" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" name="lastName" id="lastName" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="passwordConfirmation" class="form-label">Повторите пароль</label>
+                    <input type="password" class="form-control"
+                           name="passwordConfirmation" id="passwordConfirmation" required>
+                </div>
+
+                <input type="submit" class="btn btn-primary mt-3" value="Зарегистрироваться"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
