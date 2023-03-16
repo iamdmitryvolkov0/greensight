@@ -1,10 +1,12 @@
 <?php
 
+namespace Validation;
+
 class Validator implements ValidatePostInterface, ValidatePasswordInterface, ValidateEmailInterface, ValidateUniqueEmailInterface
 {
-    public function validatePost($_POST): bool
+    public function validatePost($post): bool
     {
-        return !(isset($_POST));
+        return empty($post);
     }
 
     public function validatePassword($password, $passwordConfirmation): bool

@@ -1,5 +1,7 @@
 <?php
 
+namespace Logs;
+
 class Logger implements MakeLogInterface
 {
     public function makeLog(array $errors): void
@@ -9,10 +11,10 @@ class Logger implements MakeLogInterface
             . " - Пользователь " . $_POST['firstName'] . " " . $_POST['lastName']
             . " пытается зарегистрироваться с email " . $_POST['email']
             . "\n" . "Проверка на ошибки:" . "\n"
-            . ($errors['global'] ? "Данные не отправлены" : "Данные отправлены") . "\n"
-            . ($errors['unique'] ? "Email уже зарегистрирован" : "Email свободен") . "\n"
-            . ($errors['email'] ? "Email введен некорректно" : "Email введен правильно") . "\n"
-            . ($errors['password'] ? "Пароли не совпадают" : "Пароли совпадают") . "\n"
+            . ($errors['global'] ? "× Данные не отправлены" : "✓ Данные отправлены") . "\n"
+            . ($errors['unique'] ? "× Email уже зарегистрирован" : "✓ Email свободен") . "\n"
+            . ($errors['email'] ? "× Email введен некорректно" : "✓ Email введен правильно") . "\n"
+            . ($errors['password'] ? "× Пароли не совпадают" : "✓ Пароли совпадают") . "\n"
             . "---------------------------------------------------------------" . "\n";
         fwrite($log_file, $log_message);
         fclose($log_file);

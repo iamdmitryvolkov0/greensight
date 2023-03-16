@@ -1,11 +1,10 @@
 <?php
 
-//TODO разобраться с autoload
-//require_once "Validation/Validator.php";
-//require_once "Response.php";
-//require_once "Logs/Logger.php";
+use Logs\Logger;
+use Response\Response;
+use Validation\Validator;
 
-
+require_once "../vendor/autoload.php";
 
 $errors = array();
 
@@ -42,9 +41,11 @@ $errors['email'] = $validator->validateEmail($data['email']); //return true if e
 $errors['unique'] = $validator->validateUniqueEmail($users, $data['email']); // return true if email not unique
 $errors['password'] = $validator->validatePassword($data['password'], $data['passwordConfirmation']); //return true if passwords are different
 
-$log = new Logger();
-$log->makeLog($errors);
+var_dump($errors);
 
 $response = new Response();
 $response->execute($errors);
+
+$log = new Logger();
+$log->makeLog($errors);
 

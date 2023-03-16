@@ -1,5 +1,7 @@
 <?php
 
+namespace Response;
+
 class Response
 {
     public function execute(array $errors): void
