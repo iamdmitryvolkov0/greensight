@@ -2,31 +2,26 @@
 
 namespace Validation;
 
-class Validator implements ValidatePostInterface, ValidatePasswordInterface, ValidateEmailInterface, ValidateUniqueEmailInterface
+class Validator
 {
-    public function validatePost($post): bool
+    public function isPasswordsEqual($password, $passwordConfirmation): bool
     {
-        return empty($post);
+        return $password == $passwordConfirmation;
     }
 
-    public function validatePassword($password, $passwordConfirmation): bool
+    public function isEmail($email): bool
     {
-        return !($password == $passwordConfirmation);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
-    public function validateEmail($email): bool
+    public function isEmailUnique($users, $email): bool
     {
-        return !filter_var($email, FILTER_VALIDATE_EMAIL);
-    }
-
-    public function validateUniqueEmail($users, $email): bool
-    {
-        $notUnique = false;
+        $unique = true;
         foreach ($users as $user) {
             if ($user['email'] == $email) {
-                $notUnique = true;
+                $unique = false;
             }
         }
-        return $notUnique;
+        return $unique;
     }
 }

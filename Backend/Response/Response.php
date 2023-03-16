@@ -4,12 +4,26 @@ namespace Response;
 
 class Response
 {
-    public function execute(array $errors): void
+    public function format(bool $hasErrors): string
     {
-        if (empty($errors)) {
-            echo json_encode(array("status" => "success", "message" => "Validation success"));
-        } else {
-            echo json_encode(array("status" => "error", "message" => "Enter correct data"));
-        }
+        $response = $hasErrors ? $this->error() : $this->success();
+
+        return json_encode($response);
+    }
+
+    public function success(): array
+    {
+        return [
+            'status' => 'Success',
+            'message' => 'Validation success'
+        ];
+    }
+
+    public function error(): array
+    {
+        return [
+            'status' => 'Error',
+            'message' => 'Enter correct data'
+        ];
     }
 }

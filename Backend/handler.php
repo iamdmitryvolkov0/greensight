@@ -1,12 +1,13 @@
 <?php
 
-use Logs\Logger;
+use Logs\FileLogger;
 use Response\Response;
+use Errors\ErrorHandler;
 use Validation\Validator;
 
-require_once "../vendor/autoload.php";
+require_once 'autoload.php';
 
-$errors = array();
+$errors = [];
 
 $users = [
     [
@@ -18,7 +19,7 @@ $users = [
     [
         'id' => 2,
         'name' => 'Петр',
-        'email' => 'esperanto@gmail.com'
+        'email' => ''
     ],
     [
         'id' => 3,
@@ -36,14 +37,16 @@ $data = [
 ];
 
 $validator = new Validator();
-$errors['global'] = $validator->validatePost($_POST); //return true if $_POST is empty
-$errors['email'] = $validator->validateEmail($data['email']); //return true if email invalid
-$errors['unique'] = $validator->validateUniqueEmail($users, $data['email']); // return true if email not unique
-$errors['password'] = $validator->validatePassword($data['password'], $data['passwordConfirmation']); //return true if passwords are different
+$errors['email'] = $validator->isEmail($data['email']);
+$errors['unique'] = $validator->isEmailUnique($users, $data['email']);
+$errors['password'] = $validator->isPasswordsEqual($data['password'], $data['passwordConfirmation']);
+
+$errorHandler = new ErrorHandler();
+$hasErrors = $errorHandler->hasErrors($errors);
 
 $response = new Response();
-$response->execute($errors);
+echo $response->format($hasErrors);
 
-$log = new Logger();
-$log->makeLog($errors);
+$log = new FileLogger();
+$log->write($errors);
 
