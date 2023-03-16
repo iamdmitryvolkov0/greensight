@@ -41,8 +41,6 @@ $errors['email'] = $validator->validateEmail($data['email']); //return true if e
 $errors['unique'] = $validator->validateUniqueEmail($users, $data['email']); // return true if email not unique
 $errors['password'] = $validator->validatePassword($data['password'], $data['passwordConfirmation']); //return true if passwords are different
 
-var_dump($errors);
-
 $response = new Response();
 $response->execute($errors);
 
