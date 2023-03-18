@@ -2,7 +2,6 @@
 
 use Logs\FileLogger;
 use Response\Response;
-use Errors\ErrorHandler;
 use Validation\Validator;
 
 require_once 'autoload.php';
@@ -41,8 +40,7 @@ $errors['email'] = $validator->isEmail($data['email']);
 $errors['unique'] = $validator->isEmailUnique($users, $data['email']);
 $errors['password'] = $validator->isPasswordsEqual($data['password'], $data['passwordConfirmation']);
 
-$errorHandler = new ErrorHandler();
-$hasErrors = $errorHandler->hasErrors($errors);
+$hasErrors = $validator->hasErrors($errors);
 
 $response = new Response();
 echo $response->format($hasErrors);
