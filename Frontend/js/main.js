@@ -6,14 +6,13 @@ $(function () {
             url: "../../backend/handler.php",
             data: $(this).serialize(),
             dataType: "json",
-            success: function(response) {
-                if (response.status === "success") {
+            success: function (response) {
+                if (response.status === "Success") {
                     $("#registration-form").hide();
                     $('#formTitle').hide();
-                    alert('Успешно!');
-                } else {
-                    alert('Ошибка регистрации');
-                }
+                    alert(response.message);
+                } else
+                    alert(response.message);
             }
         })
     })
